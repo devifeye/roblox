@@ -2,7 +2,7 @@
   {
     "id": "sample-new-kid",
     "title": "Eats hottest pepper",
-    "category": "Story",
+    "category": "School scene",
     "date": "2026-11-20",
     "description": "Brother eats hottest pepper, sets off fire alarm.",
     "video": "/videos/portfolio1.mp4",
@@ -15,7 +15,7 @@
   {
     "id": "sample-locked-hallway",
     "title": "Can't feel pain",
-    "category": "Comedy",
+    "category": "School scene",
     "date": "2026-11-16",
     "description": "Brother can't feel pain, so we swing a bat on his head.",
     "video": "/videos/portfolio2.mp4",
@@ -26,13 +26,13 @@
   },
   {
     "id": "sample-pizza-shift",
-    "title": "Pizza shift gone wrong",
-    "category": "Comedy",
+    "title": "Sneeze causes chaos",
+    "category": "School scene",
     "date": "2026-11-12",
-    "description": "Day one at the pizza place. Nothing goes to plan.",
-    "video": "/videos/sample-clip.mp4",
-    "poster": "/posters/sample-pizza-shift.jpg",
-    "duration": "0:06",
+    "description": "Holds in a sneeze for 3 days, finally sneezes, small earthquake erupts.",
+    "video": "/videos/portfolio3.mp4",
+    "poster": "/posters/portfolio3.jpg",
+    "duration": "0:10",
     "featured": true,
     "sample": true
   },
