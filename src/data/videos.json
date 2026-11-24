@@ -63,13 +63,13 @@
   },
   {
     "id": "sample-school-day",
-    "title": "First day back",
-    "category": "Comedy",
+    "title": "Stole brother's lunch",
+    "category": "Cafeteria scene",
     "date": "2026-10-28",
-    "description": "A first day back where everything that can go wrong does.",
-    "video": "/videos/sample-clip.mp4",
-    "poster": "/posters/sample-school-day.jpg",
-    "duration": "0:06",
+    "description": "Bully stole brother's lunch, eats mystery meat, grows to insane size, bully is scared.",
+    "video": "/videos/portfolio6.mp4",
+    "poster": "/posters/portfolio6.jpg",
+    "duration": "0:10",
     "featured": false,
     "sample": true
   }
