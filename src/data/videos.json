@@ -39,12 +39,12 @@
   },
   {
     "id": "sample-tower-climb",
-    "title": "Tower climb",
-    "category": "Story",
+    "title": "Almost got into a fight",
+    "category": "School scene",
     "date": "2026-11-08",
-    "description": "Every floor gets harder. The top floor isn't what it seems.",
-    "video": "/videos/sample-clip.mp4",
-    "poster": "/posters/sample-tower-climb.jpg",
+    "description": "Brother tried to fight me, but my cold stare became literal.",
+    "video": "/videos/portfolio4.mp4",
+    "poster": "/posters/portfolio4.jpg",
     "duration": "0:06",
     "featured": false,
     "sample": true
