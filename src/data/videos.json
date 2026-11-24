@@ -9,6 +9,7 @@
     "poster": "/posters/portfolio1.jpg",
     "duration": "0:10",
     "featured": true,
+    "preview": "/videos/portfolio1.mp4",
     "hero": true,
     "sample": true
   },
