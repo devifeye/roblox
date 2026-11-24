@@ -73,4 +73,28 @@
     "featured": false,
     "sample": true
   }
+  {
+    "id": "sample-school-day",
+    "title": "Food fight",
+    "category": "Cafeteria scene",
+    "date": "2026-10-28",
+    "description": "Bully throws meatball at brother, catches it on the fork, throws it back, bounces off all tables.",
+    "video": "/videos/portfolio7.mp4",
+    "poster": "/posters/portfolio7.jpg",
+    "duration": "0:10",
+    "featured": false,
+    "sample": true
+  }
+  {
+    "id": "sample-school-day",
+    "title": "Dodge the Dogdgeball",
+    "category": "Gym scene",
+    "date": "2026-10-28",
+    "description": "Bully throws dodgeball at brother, ball stops mid air before hitting him, goes back and chases bully.",
+    "video": "/videos/portfolio8.mp4",
+    "poster": "/posters/portfolio8.jpg",
+    "duration": "0:11",
+    "featured": false,
+    "sample": true
+  }
 ]
