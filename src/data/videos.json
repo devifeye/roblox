@@ -1,16 +1,16 @@
 [
   {
     "id": "sample-new-kid",
-    "title": "The new kid",
+    "title": "Eats hottest pepper",
     "category": "Story",
     "date": "2026-11-20",
-    "description": "A new student finds out the school has one rule nobody explains.",
-    "video": "/videos/sample-clip.mp4",
-    "poster": "/posters/sample-new-kid.jpg",
-    "duration": "0:06",
+    "description": "Brother eats hottest pepper, sets off fire alarm.",
+    "video": "/videos/portfolio1.mp4",
+    "poster": "/posters/poster1.jpg",
+    "duration": "0:10",
     "featured": true,
     "hero": true,
-    "preview": "/videos/sample-clip.mp4",
+    "preview": "/videos/portfolio1.mp4",
     "sample": true
   },
   {
