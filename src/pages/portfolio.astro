@@ -1,0 +1,234 @@
+---
+//src/pages/portfolio.astro
+import Layout from '../layouts/Layout.astro';
+import VideoCard from '../components/VideoCard.astro';
+import { getVideos, categories } from '../lib/videos';
+import { site, mailto } from '../config/site';
+
+const videos = await getVideos();
+const cats = categories(videos);
+const countLabel = (n: number) => `${n} ${n === 1 ? 'video' : 'videos'}`;
+---
+
+<Layout
+  title="Portfolio"
+  description={`Animated Roblox story videos by ${site.name}. Vertical 9:16 edits for YouTube Shorts, TikTok and Reels.`}
+>
+  <section class="intro studs" aria-labelledby="portfolio-title">
+    <div class="wrap intro__inner">
+      <h1 id="portfolio-title">Portfolio</h1>
+      <p class="lede">
+        Animated Roblox story videos, built scene by scene and cut for vertical feeds. Tap any video to play it with
+        sound.
+      </p>
+    </div>
+  </section>
+
+  <section class="library on-studio" aria-label="Videos">
+    <div class="wrap">
+      {
+        videos.length > 0 ? (
+          <>
+            <div class="toolbar">
+              {cats.length > 1 && (
+                <div class="filters" role="group" aria-label="Filter by category">
+                  <button class="filter" type="button" data-filter="all" aria-pressed="true">
+                    All
+                  </button>
+                  {cats.map((cat) => (
+                    <button class="filter" type="button" data-filter={cat} aria-pressed="false">
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              )}
+              <p class="count" aria-live="polite" data-count data-total={videos.length}>
+                {countLabel(videos.length)}
+              </p>
+            </div>
+            <div class="grid" data-grid>
+              {videos.map((video, i) => (
+                <VideoCard video={video} eager={i < 4} tone="studio" />
+              ))}
+            </div>
+          </>
+        ) : (
+          <div class="empty">
+            <h2>New videos are on the way</h2>
+            <p>
+              The portfolio is being updated. Email me and I'll send recent work directly.
+            </p>
+            <a class="btn btn--primary" href={mailto}>
+              Email {site.email}
+            </a>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section closer" aria-labelledby="closer-title">
+    <div class="wrap closer__inner">
+      <h2 id="closer-title">Want one like these for your channel?</h2>
+      <div class="btn-row">
+        <a class="btn btn--primary" href={mailto}>Email me</a>
+        <a class="btn" href="/">How it works</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const grid = document.querySelector<HTMLElement>('[data-grid]');
+  const buttons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-filter]'));
+  const count = document.querySelector<HTMLElement>('[data-count]');
+
+  function apply(filter: string, updateUrl: boolean) {
+    if (!grid) return;
+    const valid = buttons.some((b) => b.dataset.filter === filter);
+    const active = valid ? filter : 'all';
+    let shown = 0;
+
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.filter === active)));
+    grid.querySelectorAll<HTMLElement>('[data-category]').forEach((card) => {
+      const match = active === 'all' || card.dataset.category === active;
+      card.hidden = !match;
+      if (match) shown++;
+    });
+    if (count) count.textContent = `${shown} ${shown === 1 ? 'video' : 'videos'}`;
+
+    if (updateUrl) {
+      const url = new URL(window.location.href);
+      if (active === 'all') url.searchParams.delete('category');
+      else url.searchParams.set('category', active.toLowerCase());
+      history.replaceState(null, '', url);
+    }
+  }
+
+  buttons.forEach((button) =>
+    button.addEventListener('click', () => apply(button.dataset.filter ?? 'all', true)),
+  );
+
+  // Shareable filtered links, e.g. /portfolio?category=horror
+  const requested = new URL(window.location.href).searchParams.get('category')?.toLowerCase();
+  if (requested) {
+    const match = buttons.find((b) => b.dataset.filter?.toLowerCase() === requested);
+    if (match) apply(match.dataset.filter!, false);
+  }
+</script>
+
+<style>
+  .intro {
+    padding-block: clamp(3rem, 7vw, 5rem) clamp(2.5rem, 5vw, 3.5rem);
+  }
+
+  .intro h1 {
+    font-size: var(--step-4);
+  }
+
+  .intro .lede {
+    margin-top: 1.25rem;
+  }
+
+  .library {
+    background: var(--studio);
+    color: var(--on-studio);
+    padding-block: clamp(2rem, 4vw, 3rem) clamp(4rem, 8vw, 6rem);
+    border-top: 14px solid #1a1c21;
+  }
+
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem 2rem;
+    margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .filter {
+    min-height: 2.6rem;
+    padding: 0.5rem 1rem;
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 700;
+    font-stretch: 112%;
+    color: var(--on-studio);
+    background: var(--studio-2);
+    border: 1px solid var(--studio-line);
+    border-radius: 4px;
+    box-shadow: 0 4px 0 #15171b;
+    cursor: pointer;
+    transition:
+      transform 90ms var(--snap),
+      box-shadow 90ms var(--snap);
+  }
+
+  .filter:hover {
+    background: var(--studio-line);
+  }
+
+  .filter[aria-pressed='true'] {
+    color: var(--ink);
+    background: var(--yellow);
+    border-color: var(--yellow);
+    box-shadow: 0 1px 0 #b8971c;
+    transform: translateY(3px);
+  }
+
+  .count {
+    color: var(--on-studio-2);
+    font-size: var(--step--1);
+    font-stretch: 92%;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-auto-flow: dense;
+    gap: clamp(1.75rem, 3vw, 2.5rem) clamp(1rem, 2.5vw, 1.75rem);
+  }
+
+  .grid > :global([hidden]) {
+    display: none;
+  }
+
+  .empty {
+    display: grid;
+    justify-items: start;
+    gap: 1rem;
+    padding-block: 3rem;
+  }
+
+  .empty p {
+    color: var(--on-studio-2);
+    max-width: 50ch;
+  }
+
+  .closer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem 2rem;
+  }
+
+  @media (max-width: 960px) {
+    .grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

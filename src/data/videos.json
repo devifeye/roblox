@@ -1,0 +1,76 @@
+[
+  {
+    "id": "sample-new-kid",
+    "title": "The new kid",
+    "category": "Story",
+    "date": "2026-11-20",
+    "description": "A new student finds out the school has one rule nobody explains.",
+    "video": "/videos/sample-clip.mp4",
+    "poster": "/posters/sample-new-kid.jpg",
+    "duration": "0:06",
+    "featured": true,
+    "hero": true,
+    "preview": "/videos/sample-clip.mp4",
+    "sample": true
+  },
+  {
+    "id": "sample-locked-hallway",
+    "title": "Locked hallway",
+    "category": "Horror",
+    "date": "2026-11-16",
+    "description": "The lights cut out one classroom at a time.",
+    "video": "/videos/sample-clip.mp4",
+    "poster": "/posters/sample-locked-hallway.jpg",
+    "duration": "0:06",
+    "featured": true,
+    "sample": true
+  },
+  {
+    "id": "sample-pizza-shift",
+    "title": "Pizza shift gone wrong",
+    "category": "Comedy",
+    "date": "2026-11-12",
+    "description": "Day one at the pizza place. Nothing goes to plan.",
+    "video": "/videos/sample-clip.mp4",
+    "poster": "/posters/sample-pizza-shift.jpg",
+    "duration": "0:06",
+    "featured": true,
+    "sample": true
+  },
+  {
+    "id": "sample-tower-climb",
+    "title": "Tower climb",
+    "category": "Story",
+    "date": "2026-11-08",
+    "description": "Every floor gets harder. The top floor isn't what it seems.",
+    "video": "/videos/sample-clip.mp4",
+    "poster": "/posters/sample-tower-climb.jpg",
+    "duration": "0:06",
+    "featured": false,
+    "sample": true
+  },
+  {
+    "id": "sample-basement",
+    "title": "Don't open the basement",
+    "category": "Horror",
+    "date": "2026-11-02",
+    "description": "Grandma's house has a door that stays shut for a reason.",
+    "video": "/videos/sample-clip.mp4",
+    "poster": "/posters/sample-basement.jpg",
+    "duration": "0:06",
+    "featured": false,
+    "sample": true
+  },
+  {
+    "id": "sample-school-day",
+    "title": "First day back",
+    "category": "Comedy",
+    "date": "2026-10-28",
+    "description": "A first day back where everything that can go wrong does.",
+    "video": "/videos/sample-clip.mp4",
+    "poster": "/posters/sample-school-day.jpg",
+    "duration": "0:06",
+    "featured": false,
+    "sample": true
+  }
+]

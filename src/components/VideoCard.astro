@@ -1,0 +1,189 @@
+---
+//src/components/VideoCard.astro
+import { playerData, type Video } from '../lib/videos';
+
+interface Props {
+  video: Video;
+  /** Load the poster immediately (use for cards visible without scrolling). */
+  eager?: boolean;
+  tone?: 'light' | 'studio';
+}
+
+const { video, eager = false, tone = 'light' } = Astro.props;
+const dims = video.aspect === '16:9' ? [1280, 720] : video.aspect === '1:1' ? [1080, 1080] : [720, 1280];
+const aspectClass = video.aspect === '16:9' ? 'is-wide' : video.aspect === '1:1' ? 'is-square' : 'is-tall';
+---
+
+<article class:list={['card', aspectClass, `card--${tone}`]} data-category={video.category}>
+  <button class="card__media" type="button" {...playerData(video)} aria-label={`Play ${video.title}`}>
+    <img
+      src={video.poster}
+      alt=""
+      width={dims[0]}
+      height={dims[1]}
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+    {video.sample && <span class="card__sample">Sample</span>}
+    {video.duration && <span class="card__duration">{video.duration}</span>}
+    <span class="card__play" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"></path></svg>
+    </span>
+  </button>
+  <div class="card__meta">
+    <h3 class="card__title">{video.title}</h3>
+    <p class="card__sub">
+      {video.category}{video.client && <span class="card__client">for {video.client}</span>}
+    </p>
+  </div>
+</article>
+
+<style>
+  .card {
+    min-width: 0;
+  }
+
+  .card.is-wide {
+    grid-column: span 2;
+  }
+
+  .card__media {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    aspect-ratio: 9 / 16;
+    background: var(--studio);
+    border: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 6px 0 var(--card-edge, var(--plate-edge));
+    transition:
+      transform 100ms var(--snap),
+      box-shadow 100ms var(--snap);
+  }
+
+  .card--studio {
+    --card-edge: #15171b;
+  }
+
+  .is-wide .card__media {
+    aspect-ratio: 16 / 9;
+  }
+
+  .is-square .card__media {
+    aspect-ratio: 1;
+  }
+
+  .card__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card__media:hover,
+  .card__media:focus-visible {
+    transform: translateY(-3px);
+    box-shadow: 0 9px 0 var(--card-edge, var(--plate-edge));
+  }
+
+  .card__media:active {
+    transform: translateY(4px);
+    box-shadow: 0 2px 0 var(--card-edge, var(--plate-edge));
+  }
+
+  .card__play {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: grid;
+    place-items: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    color: #fff;
+    background: var(--blue);
+    border-radius: 6px;
+    box-shadow: 0 5px 0 var(--blue-deep);
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0;
+    transition:
+      opacity 100ms var(--snap),
+      transform 100ms var(--snap);
+  }
+
+  .card__play svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  .card__media:hover .card__play,
+  .card__media:focus-visible .card__play {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  @media (hover: none) {
+    .card__play {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(0.85);
+    }
+  }
+
+  .card__duration,
+  .card__sample {
+    position: absolute;
+    padding: 0.2rem 0.45rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    font-stretch: 100%;
+    line-height: 1.2;
+    border-radius: 3px;
+  }
+
+  .card__duration {
+    right: 0.6rem;
+    bottom: 0.6rem;
+    color: #fff;
+    background: rgb(20 22 26 / 0.82);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .card__sample {
+    left: 0.6rem;
+    top: 0.6rem;
+    color: var(--ink);
+    background: var(--yellow);
+  }
+
+  .card__meta {
+    padding-top: 1.1rem;
+  }
+
+  .card__title {
+    font-size: 1.05rem;
+    font-stretch: 112%;
+    font-weight: 750;
+    letter-spacing: 0;
+    line-height: 1.25;
+  }
+
+  .card__sub {
+    margin-top: 0.2rem;
+    font-size: var(--step--1);
+    font-stretch: 92%;
+    color: var(--ink-2);
+  }
+
+  .card--studio .card__title {
+    color: var(--on-studio);
+  }
+
+  .card--studio .card__sub {
+    color: var(--on-studio-2);
+  }
+
+  .card__client::before {
+    content: ', ';
+  }
+</style>

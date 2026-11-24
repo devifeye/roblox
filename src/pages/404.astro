@@ -1,0 +1,150 @@
+---
+//src/pages/404.astro
+// Vercel serves dist/404.html automatically (with a real 404 status) for any unknown URL.
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page not found" description="This page could not be found." noindex>
+  <section class="lost studs" aria-labelledby="lost-title">
+    <div class="wrap lost__inner">
+      <div class="fall" aria-hidden="true">
+        <div class="fall__block"></div>
+        <div class="fall__plate fall__plate--left"></div>
+        <div class="fall__plate fall__plate--right"></div>
+      </div>
+
+      <p class="lost__code">Error 404</p>
+      <h1 id="lost-title">Oof. You fell off the map.</h1>
+      <p class="lede lost__text">
+        This page isn't part of the build. It may have been moved, renamed, or left on the cutting room floor.
+      </p>
+      <div class="btn-row lost__actions">
+        <a class="btn btn--primary" href="/">Respawn at home</a>
+        <a class="btn" href="/portfolio">Watch the portfolio</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .lost {
+    border-bottom: 14px solid var(--plate-edge);
+  }
+
+  .lost__inner {
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    padding-block: clamp(3rem, 8vw, 6rem) clamp(4rem, 9vw, 7rem);
+  }
+
+  .lost h1 {
+    font-size: var(--step-4);
+    max-width: 14ch;
+  }
+
+  .lost__code {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    font-stretch: 112%;
+    color: var(--ink-2);
+  }
+
+  .lost__text {
+    margin-top: 1.5rem;
+    max-width: 46ch;
+  }
+
+  .lost__actions {
+    justify-content: center;
+    margin-top: 2.25rem;
+  }
+
+  /* A block that drops through a gap in the baseplate, then respawns. */
+  .fall {
+    position: relative;
+    width: min(100%, 22rem);
+    height: 13rem;
+    margin-bottom: 2rem;
+    overflow: hidden;
+  }
+
+  .fall__plate {
+    position: absolute;
+    top: 7.5rem;
+    width: calc(50% - 2.6rem);
+    height: 2rem;
+    background: var(--plate-edge);
+    border-radius: 3px;
+    box-shadow: 0 6px 0 #aeb4bd;
+  }
+
+  .fall__plate::before {
+    content: '';
+    position: absolute;
+    inset: -7px 6px auto;
+    height: 7px;
+    background: radial-gradient(ellipse at center, #b9bfc7 0 8px, transparent 8.5px) 0 0 / 28px 7px repeat-x;
+  }
+
+  .fall__plate--left {
+    left: 0;
+  }
+
+  .fall__plate--right {
+    right: 0;
+  }
+
+  .fall__block {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 3.75rem;
+    height: 3.75rem;
+    margin-left: -1.875rem;
+    background: var(--blue);
+    border-radius: 4px;
+    box-shadow:
+      inset 0 6px 0 #3d8fd0,
+      inset -6px 0 0 var(--blue-deep);
+    animation: fall 2.8s infinite;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-4.5rem);
+      opacity: 0;
+      animation-timing-function: steps(3, end);
+    }
+    12% {
+      transform: translateY(1.5rem);
+      opacity: 1;
+    }
+    /* respawn shimmer */
+    16% {
+      opacity: 0.35;
+    }
+    20% {
+      opacity: 1;
+    }
+    40% {
+      transform: translateY(1.5rem);
+      animation-timing-function: steps(6, end);
+    }
+    70% {
+      transform: translateY(14rem);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(14rem);
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fall__block {
+      animation: none;
+      transform: translateY(1.5rem);
+    }
+  }
+</style>

@@ -1,0 +1,100 @@
+---
+//src/components/Header.astro
+import Logo from './Logo.astro';
+import { site, mailto } from '../config/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isPortfolio = path.startsWith('/portfolio');
+---
+
+<header class="header">
+  <div class="wrap header__inner">
+    <a class="header__brand" href="/" aria-current={path === '/' ? 'page' : undefined}>
+      <Logo size={32} />
+      <span>{site.name}</span>
+    </a>
+    <nav class="header__nav" aria-label="Main">
+      <a class="header__link" href="/portfolio" aria-current={isPortfolio ? 'page' : undefined}>Portfolio</a>
+      <a class="btn btn--primary header__cta" href={mailto}>Email me</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: relative;
+    z-index: 10;
+    background: var(--smooth);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    min-height: 4.5rem;
+  }
+
+  .header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 1.35rem;
+    font-stretch: 125%;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+
+  .header__link {
+    position: relative;
+    font-weight: 650;
+    font-stretch: 112%;
+    text-decoration: none;
+    padding-block: 0.4rem;
+  }
+
+  .header__link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 4px;
+    background: var(--blue);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 120ms var(--snap);
+  }
+
+  .header__link:hover::after,
+  .header__link[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+
+  .header__cta {
+    min-height: 2.6rem;
+    padding: 0.55rem 1rem;
+    font-size: var(--step--1);
+    box-shadow: 0 4px 0 var(--edge);
+    white-space: nowrap;
+  }
+
+  @media (max-width: 420px) {
+    .header__brand {
+      font-size: 1.15rem;
+      gap: 0.45rem;
+    }
+
+    .header__nav {
+      gap: 0.9rem;
+    }
+  }
+</style>

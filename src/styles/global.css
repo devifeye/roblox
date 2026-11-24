@@ -1,0 +1,266 @@
+/* src/styles/global.css */
+/*
+  Design tokens. Colours are taken from classic Roblox BrickColors, toned for a professional page:
+  Medium stone grey baseplate, Bright blue as the one working accent, Bright yellow only for
+  focus and the active filter. Archivo is the only typeface; its width axis does the work
+  (125% for display "bricks", 100% for reading, 88% for small meta text).
+*/
+:root {
+  --plate: #e4e7eb;
+  --plate-edge: #c9ced5;
+  --stud-hi: #eef0f3;
+  --stud-lo: #d4d8de;
+  --smooth: #f7f8fa;
+  --line: #cfd4db;
+  --ink: #1e2228;
+  --ink-2: #4b535e;
+  --studio: #24272d;
+  --studio-2: #2f333a;
+  --studio-line: #3d424a;
+  --on-studio: #e9ecf0;
+  --on-studio-2: #a9b0ba;
+  --blue: #0d69ac;
+  --blue-deep: #084a7a;
+  --blue-soft: #d5e4f1;
+  --yellow: #f5cd30;
+
+  --font: 'Archivo Variable', 'Archivo', system-ui, sans-serif;
+  --wrap: 72rem;
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  --snap: steps(5, end);
+
+  /* Type scale (1.25 ratio, with a larger display step) */
+  --step--1: 0.875rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.3rem;
+  --step-2: 1.625rem;
+  --step-3: clamp(1.9rem, 3.4vw, 2.6rem);
+  --step-4: clamp(2.4rem, 4.8vw, 4.2rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: var(--step-0);
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--plate);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+video,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-stretch: 125%;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: var(--step-3);
+}
+
+h3 {
+  font-size: var(--step-1);
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.on-studio :focus-visible {
+  outline-color: var(--yellow);
+}
+
+.wrap {
+  width: min(100% - 2 * var(--gutter), var(--wrap));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(4rem, 9vw, 7rem);
+}
+
+.section__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.lede {
+  max-width: 58ch;
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: -4rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Studded baseplate surface */
+.studs {
+  background-color: var(--plate);
+  background-image:
+    radial-gradient(circle at 50% 44%, var(--stud-hi) 0 5px, transparent 5.6px),
+    radial-gradient(circle at 50% 56%, var(--stud-lo) 0 5px, transparent 5.6px);
+  background-size: 28px 28px;
+  background-position: 0 0;
+}
+
+/* Buttons are bricks: a solid depth edge underneath that compresses when pressed. */
+.btn {
+  --edge: var(--plate-edge);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.35rem;
+  font: inherit;
+  font-size: var(--step-0);
+  font-stretch: 112%;
+  font-weight: 700;
+  line-height: 1.1;
+  text-decoration: none;
+  color: var(--ink);
+  background: var(--smooth);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  box-shadow: 0 5px 0 var(--edge);
+  cursor: pointer;
+  transform: translateY(0);
+  transition:
+    transform 90ms var(--snap),
+    box-shadow 90ms var(--snap),
+    background-color 120ms ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 0 var(--edge);
+}
+
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 var(--edge);
+}
+
+.btn--primary {
+  --edge: var(--blue-deep);
+  color: #fff;
+  background: var(--blue);
+  border-color: var(--blue);
+}
+
+.btn--primary:hover {
+  background: #0f74bd;
+}
+
+.btn--studio {
+  --edge: #15171b;
+  color: var(--on-studio);
+  background: var(--studio-2);
+  border-color: var(--studio-line);
+}
+
+.btn__icon {
+  width: 1.1em;
+  height: 1.1em;
+  flex: none;
+}
+
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem 0.9rem;
+}
+
+.text-link {
+  font-weight: 700;
+  font-stretch: 112%;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.25em;
+  text-decoration-color: var(--blue);
+}
+
+.text-link:hover {
+  color: var(--blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

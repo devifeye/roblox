@@ -1,0 +1,39 @@
+---
+//src/components/CopyEmail.astro
+import { site } from '../config/site';
+
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<button class:list={['btn', className]} type="button" data-copy-email={site.email}>
+  <svg class="btn__icon" viewBox="0 0 20 20" aria-hidden="true">
+    <rect x="6" y="6" width="11" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="2"></rect>
+    <path d="M3 13V4a1 1 0 0 1 1-1h9" fill="none" stroke="currentColor" stroke-width="2"></path>
+  </svg>
+  <span data-copy-label>Copy email</span>
+</button>
+<span class="sr-only" aria-live="polite" data-copy-status></span>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-email]').forEach((button) => {
+    const label = button.querySelector<HTMLElement>('[data-copy-label]');
+    const status = button.nextElementSibling as HTMLElement | null;
+    button.addEventListener('click', async () => {
+      const email = button.dataset.copyEmail ?? '';
+      try {
+        await navigator.clipboard.writeText(email);
+        if (label) label.textContent = 'Copied';
+        if (status) status.textContent = `${email} copied to clipboard`;
+      } catch {
+        if (label) label.textContent = email;
+      }
+      window.setTimeout(() => {
+        if (label) label.textContent = 'Copy email';
+        if (status) status.textContent = '';
+      }, 2200);
+    });
+  });
+</script>

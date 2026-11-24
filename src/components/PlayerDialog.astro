@@ -1,0 +1,145 @@
+---
+//src/components/PlayerDialog.astro
+// One shared player for the whole site. Any element with data-play-* attributes opens it.
+---
+
+<dialog class="player on-studio" id="player" aria-labelledby="player-title">
+  <div class="player__panel">
+    <div class="player__bar">
+      <h2 class="player__title" id="player-title"></h2>
+      <button class="player__close" type="button" data-player-close>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4l12 12M16 4 4 16" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"></path></svg>
+        <span>Close</span>
+      </button>
+    </div>
+    <div class="player__stage" data-player-stage></div>
+    <p class="player__desc" data-player-desc></p>
+  </div>
+</dialog>
+
+<script>
+  import { initPlayer } from '../scripts/player';
+  initPlayer();
+</script>
+
+<style>
+  .player {
+    width: min(100% - 2rem, 30rem);
+    max-height: calc(100dvh - 2rem);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--on-studio);
+    overflow: visible;
+  }
+
+  .player.is-wide {
+    width: min(100% - 2rem, 62rem);
+  }
+
+  .player.is-square {
+    width: min(100% - 2rem, 40rem);
+  }
+
+  .player::backdrop {
+    background: rgb(20 22 26 / 0.86);
+  }
+
+  .player[open] {
+    animation: player-in 180ms var(--snap);
+  }
+
+  @keyframes player-in {
+    from {
+      transform: translateY(-24px);
+      opacity: 0;
+    }
+  }
+
+  .player__panel {
+    background: var(--studio);
+    border: 1px solid var(--studio-line);
+    border-radius: 10px;
+    box-shadow: 0 10px 0 #15171b;
+    padding: 0.85rem;
+  }
+
+  .player__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.15rem 0.15rem 0.85rem;
+  }
+
+  .player__title {
+    font-size: var(--step-0);
+    font-weight: 750;
+    font-stretch: 115%;
+    letter-spacing: 0;
+    line-height: 1.2;
+  }
+
+  .player__close {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    min-height: 2.5rem;
+    padding: 0.4rem 0.8rem;
+    font: inherit;
+    font-size: var(--step--1);
+    font-weight: 700;
+    color: var(--on-studio);
+    background: var(--studio-2);
+    border: 1px solid var(--studio-line);
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .player__close svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+
+  .player__close:hover {
+    background: var(--studio-line);
+  }
+
+  .player__stage {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    max-height: calc(100dvh - 9rem);
+    margin-inline: auto;
+    background: #000;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .player.is-wide .player__stage {
+    aspect-ratio: 16 / 9;
+  }
+
+  .player.is-square .player__stage {
+    aspect-ratio: 1;
+  }
+
+  .player__stage :global(iframe),
+  .player__stage :global(video) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #000;
+  }
+
+  .player__desc {
+    padding: 0.85rem 0.15rem 0.15rem;
+    color: var(--on-studio-2);
+    font-size: var(--step--1);
+  }
+
+  .player__desc:empty {
+    display: none;
+  }
+</style>

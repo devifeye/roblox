@@ -1,0 +1,88 @@
+---
+//src/components/Footer.astro
+import Logo from './Logo.astro';
+import { site, mailto } from '../config/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <div class="footer__brand">
+      <Logo size={36} />
+      <div>
+        <p class="footer__name">{site.name}</p>
+        <p class="footer__muted">{site.tagline}. Based in {site.location}.</p>
+      </div>
+    </div>
+    <nav class="footer__nav" aria-label="Footer">
+      <a href="/">Home</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href={mailto}>{site.email}</a>
+    </nav>
+  </div>
+  <div class="wrap footer__legal">
+    <p>&copy; {year} {site.name}. All videos shown are the property of their respective owners.</p>
+    <p>Roblox is a trademark of Roblox Corporation. This site is independent and is not affiliated with or endorsed by Roblox Corporation.</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--smooth);
+    border-top: 1px solid var(--line);
+    padding-block: 3rem 2rem;
+    font-size: var(--step--1);
+  }
+
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .footer__brand {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+  }
+
+  .footer__name {
+    font-size: 1.15rem;
+    font-weight: 800;
+    font-stretch: 125%;
+  }
+
+  .footer__muted {
+    color: var(--ink-2);
+  }
+
+  .footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.75rem;
+    align-items: center;
+  }
+
+  .footer__nav a {
+    font-weight: 650;
+    text-decoration: none;
+    padding-block: 0.5rem;
+  }
+
+  .footer__nav a:hover {
+    color: var(--blue);
+    text-decoration: underline;
+  }
+
+  .footer__legal {
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink-2);
+    font-stretch: 92%;
+  }
+</style>

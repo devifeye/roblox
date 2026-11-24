@@ -1,0 +1,15 @@
+---
+//src/components/Logo.astro
+// A single isometric block. Original mark, not based on any Roblox logo.
+interface Props {
+  size?: number;
+}
+const { size = 32 } = Astro.props;
+---
+
+<svg width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+  <path d="M16 3 29 10.5 16 18 3 10.5Z" fill="#3d8fd0"></path>
+  <path d="M3 10.5 16 18v13L3 23.5Z" fill="#0d69ac"></path>
+  <path d="M29 10.5 16 18v13l13-7.5Z" fill="#084a7a"></path>
+  <ellipse cx="16" cy="9.6" rx="3.6" ry="2" fill="#8cc0e8"></ellipse>
+</svg>
