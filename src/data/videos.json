@@ -11,7 +11,7 @@
     "featured": true,
     "preview": "/videos/portfolio1.mp4",
     "hero": true,
-    "sample": true
+    "sample": false
   },
   {
     "id": "sample-locked-hallway",
@@ -23,7 +23,7 @@
     "poster": "/posters/portfolio2.jpg",
     "duration": "0:10",
     "featured": true,
-    "sample": true
+    "sample": false
   },
   {
     "id": "sample-pizza-shift",
@@ -35,7 +35,7 @@
     "poster": "/posters/portfolio3.jpg",
     "duration": "0:10",
     "featured": true,
-    "sample": true
+    "sample": false
   },
   {
     "id": "sample-tower-climb",
@@ -47,7 +47,7 @@
     "poster": "/posters/portfolio4.jpg",
     "duration": "0:10",
     "featured": false,
-    "sample": true
+    "sample": false
   },
   {
     "id": "sample-basement",
@@ -59,7 +59,7 @@
     "poster": "/posters/portfolio5.jpg",
     "duration": "0:10",
     "featured": false,
-    "sample": true
+    "sample": false
   },
   {
     "id": "sample-school-day",
@@ -71,10 +71,10 @@
     "poster": "/posters/portfolio6.jpg",
     "duration": "0:10",
     "featured": false,
-    "sample": true
+    "sample": false
   },
   {
-    "id": "smple-food-fight",
+    "id": "food-fight",
     "title": "Food fight",
     "category": "Cafeteria scene",
     "date": "2026-10-28",
@@ -83,11 +83,11 @@
     "poster": "/posters/portfolio7.jpg",
     "duration": "0:10",
     "featured": false,
-    "sample": true
+    "sample": false
   },
   {
-    "id": "sample-dodgeball",
-    "title": "Dodge the Dogdgeball",
+    "id": "dodgeball",
+    "title": "Dodge the Dodgeball",
     "category": "Gym scene",
     "date": "2026-10-28",
     "description": "Bully throws dodgeball at brother, ball stops mid air before hitting him, goes back and chases bully.",
@@ -95,6 +95,6 @@
     "poster": "/posters/portfolio8.jpg",
     "duration": "0:11",
     "featured": false,
-    "sample": true
+    "sample": false
   }
 ]
